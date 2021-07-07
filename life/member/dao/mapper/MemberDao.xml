@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.life.member.dao.MemberDao">
+  <select id="userid_check" resultType="Integer">   <!-- ?�일???��??�이?�의  존재?��??�인, ?�으�??�수 반환-->
+    select count(*) from member where userid=#{param1}
+  </select>
+  
+  <select id="mypage" resultType="kr.co.life.member.dto.MemberDto">
+    select * from member where userid=#{param1}
+  </select>
+  
+  <select id="member_list" resultType="kr.co.life.member.dto.MemberDto">
+    select * from member where mstate in (0, 1, 2)
+  </select>
+  
+  <select id="admin_list" resultType="kr.co.life.member.dto.MemberDto">
+    select * from member where mstate in (3,4) 
+  </select>
+  
+  <select id="login_ok" resultType="kr.co.life.member.dto.MemberDto">
+    select * from member where userid=#{userid} and pwd=#{pwd}
+  </select>
+  
+    <select id="pwd_search_ok" resultType="kr.co.life.member.dto.MemberDto">
+    select * from member where userid=#{userid} and nickname=#{nickname} and email=#{email}
+  </select>
+  
+  <insert id="member_ok" parameterType="kr.co.life.member.dto.MemberDto">
+     insert into member (userid,nickname,pwd,email,sex,year,disease,concern,route,regdate)
+     values(#{userid},#{nickname},#{pwd},#{email},#{sex},#{year},#{disease},#{concern},#{route},now())
+  </insert>  
+    
+  <update id="myupdate_ok" parameterType="kr.co.life.member.dto.MemberDto">
+     update member set userid=#{userid},nickname=#{nickname},pwd=#{pwd},email=#{email},sex=#{sex},
+     year=#{year},disease=#{disease},concern=#{concern},route=#{route} where id=#{id}
+  </update>
+  
+  <update id="mem_state" parameterType="kr.co.life.member.dto.MemberDto">
+     update member set mstate=#{mstate} where id=#{id}
+  </update>
+  
+  <update id="adm_state" parameterType="kr.co.life.member.dto.MemberDto">
+     update member set mstate=#{mstate} where id=#{id}
+  </update>
+  
+  <select id="r_like_list" parameterType="String" resultType="kr.co.life.recipe.dto.RecipeDto">
+	 select r.*, r2.recipecode from recipe as r, r_like as r2 where userid=#{param1} and r.recipecode=r2.recipecode
+  </select>
+  
+  <select id="h_like_list" parameterType="String" resultType="kr.co.life.hfood.dto.HfoodDto">
+	 SELECT h.*,h2.pid FROM hproduct AS h, hlike AS h2 WHERE userid=#{param1} AND h.id=h2.pid ORDER BY id;
+  </select>
+</mapper>
+
+
+
+
+
+
+

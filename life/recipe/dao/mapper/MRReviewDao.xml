@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.life.recipe.dao.MRReviewDao">
+	<insert id="write_ok" parameterType="kr.co.life.recipe.dto.MRReviewDto">
+	 insert into mrreview (nickname, content, fname, writeday, rating, mr_id) 
+	 values (#{nickname}, #{content}, #{fname}, now(), #{rating}, #{mr_id})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+	 delete from mrreview where id=#{param1}
+	</delete>
+	<select id="update" parameterType="Integer" resultType="kr.co.life.recipe.dto.MRReviewDto">
+	 select * from mrreview where id=#{param1}
+	</select>
+	<update id="update_ok" parameterType="kr.co.life.recipe.dto.MRReviewDto">
+	 update mrreview set content=#{content}, fname=#{fname}, rating=#{rating} where id=#{id}
+	</update>
+	<update id="setRating" parameterType="Integer">
+	 update mrecipe set avg_rating=(select avg(rating) from mrreview where mr_id=#{param1}) WHERE mr_id=#{param1}
+	</update>
+</mapper>

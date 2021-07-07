@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+  
+<mapper namespace="kr.co.life.hfood.dao.HfoodDao">
+	
+	<select id="hrlist" resultType="kr.co.life.hfood.dto.HreviewDto">
+		select * from hreview where pid=#{param1} order by id desc limit #{param2},10 
+	</select>
+	
+	<select id="page_count" resultType="Integer">
+		select ceil(count(*)/10) from hreview where pid=#{param1}
+	</select>
+	
+	<select id="hlike" parameterType="String" resultType="Integer">
+    	select count(*) from hlike where pid=#{param1} and userid=#{param2}
+   	</select>
+   
+   	<insert id="hlike1" parameterType="String">
+    	insert into hlike (pid, userid) values (#{param1}, #{param2})
+   	</insert>
+   	
+   	<delete id="hlike2" parameterType="String">
+    	delete from hlike where pid=#{param1} and userid=#{param2}
+   	</delete>
+   	
+  	<select id="likecnt" parameterType="String" resultType="Integer">
+		select count(*) from hlike where pid=#{param1}
+	</select>
+	
+	<select id="hsearch2" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select h.*,(select round(avg(rating),1) from hreview where pid=h.id) as jumsu from hproduct as h 
+		where name like CONCAT('%',#{keyword},'%') order by h.id 
+	</select>
+	
+	<select id="hsearch" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select h.*,(select round(avg(rating),1) from hreview where pid=h.id) as jumsu from hproduct as h 
+		where name like CONCAT('%',#{param1},'%') and category=#{param2} order by h.id 
+	</select>
+	
+	<select id="hreviewcnt" resultType="Integer">
+		select count(*) from hreview where pid=#{param1}
+	</select>
+	
+	<select id="hfoodmain" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select * from hproduct order by readnum desc limit 5
+	</select>
+	
+	<update id="ctgreadnum">
+		update hmaterial set readnum=readnum+1 where ctg=#{param1}
+	</update>
+	
+	<update id="hreadnum">
+		update hproduct set readnum=readnum+1 where id=#{param1}
+	</update>
+	
+	<delete id="hdelete">
+		delete from hreview where id=#{param1}
+	</delete>
+	
+	<update id="hupdate_ok">
+		update hreview set nickname=#{nickname},rating=#{rating},content=#{content} where id=#{id}
+	</update>
+	
+	<select id="hupdate" resultType="kr.co.life.hfood.dto.HreviewDto">
+		select * from hreview where id=#{param1}
+	</select>
+	
+	
+	
+	<insert id="hreview_ok" parameterType="kr.co.life.hfood.dto.HreviewDto">
+		insert into hreview (userid,nickname,content,rating,pid,writeday)
+		values(#{userid},#{nickname},#{content},#{rating},#{pid},now())
+	</insert>
+	
+	<select id="havg" resultType="Double">
+		select round(avg(rating),1) from hreview where pid=#{param1}
+	</select>
+	
+	<select id="hcontent" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select * from hproduct where id=#{param1}
+	</select>
+	
+	<select id="ctgname" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select distinct ctg,ctgname from hmaterial
+	</select>
+	
+	<select id="material" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select * from hmaterial where ctg=#{param1}
+	</select>
+	
+	<select id="list" resultType="kr.co.life.hfood.dto.HfoodDto">
+		select h.*,(select round(avg(rating),1) from hreview where pid=h.id) as jumsu from hproduct as h 
+		where category=#{param1} order by h.id 
+	</select>
+</mapper>

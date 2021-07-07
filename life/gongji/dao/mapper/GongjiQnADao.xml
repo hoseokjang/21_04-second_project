@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+  
+<mapper namespace="kr.co.life.gongji.dao.GongjiQnADao">
+
+	<select id="list" resultType="kr.co.life.gongji.dto.GongjiQnADto">
+		select * from gongji_qna
+	</select>
+	
+	<select id="qna_update" resultType="kr.co.life.gongji.dto.GongjiQnADto">
+		select * from gongji_qna where id=#{id}
+	</select>
+	
+	<update id="qna_update_ok" parameterType="kr.co.life.gongji.dto.GongjiQnADto">
+		update gongji_qna set head=#{head}, body=#{body} where id=#{id}
+	</update>
+	
+	<delete id="qna_delete">
+		delete from gongji_qna where id=#{id}
+	</delete>
+</mapper>

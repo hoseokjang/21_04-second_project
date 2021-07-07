@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+  
+<mapper namespace="kr.co.life.gongji.dao.GongjiListDao">
+	<select id="get_num" resultType="Integer">
+		select count(*) from gongji_list
+	</select>
+	<select id="gongjimain" resultType="kr.co.life.gongji.dto.GongjiListDto">
+		select * from gongji_list order by id limit 5
+	</select>
+	
+	<select id="list" resultType="kr.co.life.gongji.dto.GongjiListDto">
+		select * from gongji_list limit #{param1}, 5
+	</select>
+	
+	<!-- 전체페이지 수 -->
+	<select id="get_pagecnt" resultType="Integer">
+		select ceil(count(*)/5) from gongji_list
+	</select>
+	
+	<delete id="gongji_delete">
+		delete from gongji_list where id=#{id}
+	</delete>
+	
+	<select id="gongji_update" resultType="kr.co.life.gongji.dto.GongjiListDto">
+		select * from gongji_list where id=#{id}
+	</select>
+	
+	<update id="gongji_update_ok" parameterType="kr.co.life.gongji.dto.GongjiListDto">
+		update gongji_list set head=#{head}, body=#{body} where id=#{id}
+		
+	</update>
+</mapper>

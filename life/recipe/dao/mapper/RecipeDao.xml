@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.life.recipe.dao.RecipeDao">
+	<select id="recipemain" resultType="kr.co.life.recipe.dto.RecipeDto">
+		select * from recipe order by readnum desc limit 5
+	</select>
+	<select id="recipe_list" resultType="kr.co.life.recipe.dto.RecipeDto">
+		select * from recipe order by r_id desc limit #{param1},20
+	</select>
+	<select id="get_pagecnt" resultType="Integer">
+	  select ceil(count(*)/10) from recipe
+	</select>
+	<select id="effect_list" resultType="kr.co.life.recipe.dto.MaterialDto">
+		select ctg, effect from material group by effect
+	</select>
+	<select id="material_list" resultType="kr.co.life.recipe.dto.MaterialDto">
+		select * from material where ctg=#{param1}
+	</select>
+	<select id="recipe_list1" resultType="kr.co.life.recipe.dto.RecipeDto">
+		SELECT * from recipe AS r 
+		WHERE r.ingrename_1 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_2 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_3 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_4 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_5 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_6 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_7 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_8 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_9 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_10 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_11 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_12 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_13 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_14 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_15 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_16 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_17 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_18 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_19 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_20 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_21 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_22 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_23 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_24 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		order by r_id desc limit #{param2},20
+	</select>
+	<select id="get_pagecnt1" resultType="Integer">
+	  select ceil(count(*)/10) from recipe AS r 
+	  WHERE r.ingrename_1 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_2 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_3 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_4 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_5 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_6 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_7 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_8 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_9 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_10 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_11 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_12 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_13 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_14 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_15 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_16 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_17 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_18 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_19 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_20 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_21 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_22 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_23 in (SELECT material FROM material WHERE ctg=#{param1}) 
+		OR r.ingrename_24 in (SELECT material FROM material WHERE ctg=#{param1})
+	</select>
+	<select id="recipe_list2" resultType="kr.co.life.recipe.dto.RecipeDto">
+		SELECT * from recipe AS r WHERE 
+		r.ingrename_1=#{param1} OR r.ingrename_2=#{param1} OR r.ingrename_3=#{param1} OR 
+		r.ingrename_4=#{param1} OR r.ingrename_5=#{param1} OR r.ingrename_6=#{param1} OR 
+		r.ingrename_7=#{param1} OR r.ingrename_8=#{param1} OR r.ingrename_9=#{param1} OR 
+		r.ingrename_10=#{param1} OR r.ingrename_11=#{param1} OR r.ingrename_12=#{param1} OR 
+		r.ingrename_13=#{param1} OR r.ingrename_14=#{param1} OR r.ingrename_15=#{param1} OR 
+		r.ingrename_16=#{param1} OR r.ingrename_17=#{param1} OR r.ingrename_18=#{param1} OR 
+		r.ingrename_19=#{param1} OR r.ingrename_20=#{param1} OR r.ingrename_21=#{param1} OR 
+		r.ingrename_22=#{param1} OR r.ingrename_23=#{param1} OR r.ingrename_24=#{param1} 
+		order by r_id desc limit #{param2},20
+	</select>
+	<select id="get_pagecnt2" resultType="Integer">
+	  select ceil(count(*)/10) from recipe AS r WHERE 
+	  r.ingrename_1=#{param1} OR r.ingrename_2=#{param1} OR r.ingrename_3=#{param1} OR 
+		r.ingrename_4=#{param1} OR r.ingrename_5=#{param1} OR r.ingrename_6=#{param1} OR 
+		r.ingrename_7=#{param1} OR r.ingrename_8=#{param1} OR r.ingrename_9=#{param1} OR 
+		r.ingrename_10=#{param1} OR r.ingrename_11=#{param1} OR r.ingrename_12=#{param1} OR 
+		r.ingrename_13=#{param1} OR r.ingrename_14=#{param1} OR r.ingrename_15=#{param1} OR 
+		r.ingrename_16=#{param1} OR r.ingrename_17=#{param1} OR r.ingrename_18=#{param1} OR 
+		r.ingrename_19=#{param1} OR r.ingrename_20=#{param1} OR r.ingrename_21=#{param1} OR 
+		r.ingrename_22=#{param1} OR r.ingrename_23=#{param1} OR r.ingrename_24=#{param1}
+	</select>
+	<select id="recipe_lists" resultType="kr.co.life.recipe.dto.RecipeDto">
+	  select * from recipe where name like CONCAT('%',#{keyword},'%')
+	</select>
+	<select id="get_pagecnts" resultType="Integer">
+	  select ceil(count(*)/10) from recipe where name like CONCAT('%',#{keyword},'%')
+	</select>
+	<select id="recipe_detail" resultType="kr.co.life.recipe.dto.RecipeDto">
+		select * from recipe where recipecode=#{param1} limit 1
+	</select>
+	<update id="readnum" parameterType="kr.co.life.recipe.dto.RecipeDto">
+	 update recipe set readnum=readnum+1 where recipecode=#{param1}
+	</update>
+	<update id="mreadnum" parameterType="kr.co.life.recipe.dto.MaterialDto">
+	 update material set readnum=readnum+1 where ctg=#{param1}
+	</update>
+	<select id="recipe_like" parameterType="String" resultType="Integer">
+	 select count(*) from r_like where recipecode=#{param1} and userid=#{param2}
+	</select>
+	<select id="recipe_like1" parameterType="String">
+	 insert r_like (recipecode, userid) values (#{param1}, #{param2})
+	</select>
+	<select id="recipe_like2" parameterType="String">
+	 delete from r_like where recipecode=#{param1} and userid=#{param2}
+	</select>
+	<update id="update_rlike" parameterType="String">
+	 update recipe set r_like=(select count(*) from r_like WHERE recipecode=#{param1}) where recipecode=#{param1}
+	</update>
+	<select id="likecnt" parameterType="String" resultType="Integer">
+	 select count(*) from r_like where recipecode=#{param1}
+	</select>
+</mapper>

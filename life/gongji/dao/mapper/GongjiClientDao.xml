@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+  
+<mapper namespace="kr.co.life.gongji.dao.GongjiClientDao">
+	<insert id="insert_ok" parameterType="kr.co.life.gongji.dto.GongjiClientDto">
+		insert into gongji_client(title,userid,content,img,writeday) 
+		values(#{title},#{userid},#{content},#{img},now())
+	</insert>
+	<select id="list" resultType="kr.co.life.gongji.dto.GongjiClientDto">
+		select * from gongji_client order by id desc
+	</select>
+	
+	<select id="gongji_client_content" resultType="kr.co.life.gongji.dto.GongjiClientDto">
+		select * from gongji_client where id=#{param1}
+	</select>
+	
+	<select id="admin_client_list" resultType="kr.co.life.gongji.dto.GongjiClientDto">
+		select * from gongji_client order by id desc
+	</select>
+	
+	<select id="gongji_client_content_update" resultType="kr.co.life.gongji.dto.GongjiClientDto">
+		select * from gongji_client where id=#{id}
+	</select>
+	
+	<update id="gongji_client_content_update_ok" parameterType="kr.co.life.gongji.dto.GongjiClientDto">
+		update gongji_client set title=#{title}, content=#{content}, img=#{img}, reply=#{reply}, reply_text=#{reply_text} where id=#{id}
+	</update>
+	
+	<update id="gongji_client_content_update_ok_admin">
+		update gongji_client set reply=#{param1}, reply_text=#{param2} where id=#{param3}
+	</update>
+	
+	<delete id="gongji_client_content_delete">
+		delete from gongji_client where id=#{id}
+	</delete>
+</mapper>

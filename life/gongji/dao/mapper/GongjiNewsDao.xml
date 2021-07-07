@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+<mapper namespace="kr.co.life.gongji.dao.GongjiNewsDao">  
+	<select id="get_num" resultType="Integer">
+		select count(*) from gongji_news
+	</select>
+	<select id="get_pagecnt" resultType="Integer">
+		select ceil(count(*)/10) from gongji_news
+	</select>
+  <select id="news_list" resultType="kr.co.life.gongji.dto.GongjiNewsDto">
+  	select * from gongji_news order by id desc limit #{param1}, 10
+  </select>
+  
+  <select id="news_list2" resultType="kr.co.life.gongji.dto.GongjiNewsDto">
+  	select * from gongji_news order by id desc limit 7
+  </select>
+</mapper>

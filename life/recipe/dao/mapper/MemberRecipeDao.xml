@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybats-3-mapper.dtd">
+
+<mapper namespace="kr.co.life.recipe.dao.MemberRecipeDao">
+	<select id="mrmain" resultType="kr.co.life.recipe.dto.MemberRecipeDto">
+		select * from mrecipe order by mr_id desc limit 5
+	</select>
+	<insert id="write_ok" parameterType="kr.co.life.recipe.dto.MemberRecipeDto">
+	insert into mrecipe (name, nickname, detail, inbun, time, diff, writeday, 
+	ingrename_1, ingrequan_1, ingrename_2, ingrequan_2, ingrename_3, ingrequan_3, 
+	ingrename_4, ingrequan_4, ingrename_5, ingrequan_5, ingrename_6, ingrequan_6, 
+	ingrename_7, ingrequan_7, ingrename_8, ingrequan_8, ingrename_9, ingrequan_9, 
+	ingrename_10, ingrequan_10, ingrename_11, ingrequan_11, ingrename_12, ingrequan_12, 
+	ingrename_13, ingrequan_13, ingrename_14, ingrequan_14, ingrename_15, ingrequan_15, 
+	ingrename_16, ingrequan_16, ingrename_17, ingrequan_17, ingrename_18, ingrequan_18, 
+	ingrename_19, ingrequan_19, ingrename_20, ingrequan_20, 
+	step_1, step_2, step_3, step_4, step_5, step_6, step_7, step_8, step_9, step_10, 
+	step_11, step_12, step_13, step_14, step_15, step_16, step_17, step_18, step_19, step_20, tip, 
+	fname0, fname1, fname2, fname3, fname4, fname5, fname6, fname7, fname8, fname9, fname10, fname11, 
+	fname12, fname13, fname14, fname15, fname16, fname17, fname18, fname19, fname20) 
+	values (#{name}, #{nickname}, #{detail}, #{inbun}, #{time}, #{diff}, now(), 
+	#{ingrename_1}, #{ingrequan_1}, #{ingrename_2}, #{ingrequan_2}, #{ingrename_3}, #{ingrequan_3}, 
+	#{ingrename_4}, #{ingrequan_4}, #{ingrename_5}, #{ingrequan_5}, #{ingrename_6}, #{ingrequan_6}, 
+	#{ingrename_7}, #{ingrequan_7}, #{ingrename_8}, #{ingrequan_8}, #{ingrename_9}, #{ingrequan_9}, 
+	#{ingrename_10}, #{ingrequan_10}, #{ingrename_11}, #{ingrequan_11}, #{ingrename_12}, #{ingrequan_12}, 
+	#{ingrename_13}, #{ingrequan_13}, #{ingrename_14}, #{ingrequan_14}, #{ingrename_15}, #{ingrequan_15}, 
+	#{ingrename_16}, #{ingrequan_16}, #{ingrename_17}, #{ingrequan_17}, #{ingrename_18}, #{ingrequan_18}, 
+	#{ingrename_19}, #{ingrequan_19}, #{ingrename_20}, #{ingrequan_20}, 
+	#{step_1}, #{step_2}, #{step_3}, #{step_4}, #{step_5}, #{step_6}, #{step_7}, #{step_8}, #{step_9}, #{step_10}, 
+	#{step_11}, #{step_12}, #{step_13}, #{step_14}, #{step_15}, #{step_16}, #{step_17}, #{step_18}, #{step_19}, #{step_20}, #{tip}, 
+	#{fname0}, #{fname1}, #{fname2}, #{fname3}, #{fname4}, #{fname5}, #{fname6}, #{fname7}, #{fname8}, #{fname9}, #{fname10}, #{fname11}, 
+	#{fname12}, #{fname13}, #{fname14}, #{fname15}, #{fname16}, #{fname17}, #{fname18}, #{fname19}, #{fname20})
+	</insert>
+	<select id="detail" resultType="kr.co.life.recipe.dto.MemberRecipeDto">
+	 select * from mrecipe where mr_id=#{param1}
+	</select>
+	<select id="list" resultType="kr.co.life.recipe.dto.MemberRecipeDto">
+	 select * from mrecipe order by mr_id desc limit #{param1},20
+	</select>
+	<select id="get_pagecnt" resultType="Integer">
+	  select ceil(count(*)/10) from mrecipe
+	</select>
+	<update id="mreadnum">
+	 update mrecipe set readnum=readnum+1 where mr_id=#{param1}
+	</update>
+	<delete id="delete">
+	 delete from mrecipe where mr_id=#{param1}
+	</delete>
+	<update id="update_ok" parameterType="kr.co.life.recipe.dto.MemberRecipeDto">
+	 update mrecipe set name=#{name}, detail=#{detail}, inbun=#{inbun}, time=#{time}, diff=#{diff}, 
+	ingrename_1=#{ingrename_1}, ingrequan_1=#{ingrequan_1}, ingrename_2=#{ingrename_2}, ingrequan_2=#{ingrequan_2}, 
+	ingrename_3=#{ingrename_3}, ingrequan_3=#{ingrequan_3}, ingrename_4=#{ingrename_4}, ingrequan_4=#{ingrequan_4}, 
+	ingrename_5=#{ingrename_5}, ingrequan_5=#{ingrequan_5}, ingrename_6=#{ingrename_6}, ingrequan_6=#{ingrequan_6}, 
+	ingrename_7=#{ingrename_7}, ingrequan_7=#{ingrequan_7}, ingrename_8=#{ingrename_8}, ingrequan_8=#{ingrequan_8}, 
+	ingrename_9=#{ingrename_9}, ingrequan_9=#{ingrequan_9}, ingrename_10=#{ingrename_10}, ingrequan_10=#{ingrequan_10}, 
+	ingrename_11=#{ingrename_11}, ingrequan_11=#{ingrequan_11}, ingrename_12=#{ingrename_12}, ingrequan_12=#{ingrequan_12}, 
+	ingrename_13=#{ingrename_13}, ingrequan_13=#{ingrequan_13}, ingrename_14=#{ingrename_14}, ingrequan_14=#{ingrequan_14}, 
+	ingrename_15=#{ingrename_15}, ingrequan_15=#{ingrequan_15}, ingrename_16=#{ingrename_16}, ingrequan_16=#{ingrequan_16}, 
+	ingrename_17=#{ingrename_17}, ingrequan_17=#{ingrequan_17}, ingrename_18=#{ingrename_18}, ingrequan_18=#{ingrequan_18}, 
+	ingrename_19=#{ingrename_19}, ingrequan_19=#{ingrequan_19}, ingrename_20=#{ingrename_20}, ingrequan_20=#{ingrequan_20}, 
+	step_1=#{step_1}, step_2=#{step_2}, step_3=#{step_3}, step_4=#{step_4}, step_5=#{step_5}, step_6=#{step_6}, step_7=#{step_7}, 
+	step_8=#{step_8}, step_9=#{step_9}, step_10=#{step_10}, step_11=#{step_11}, step_12=#{step_12}, step_13=#{step_13}, 
+	step_14=#{step_14}, step_15=#{step_15}, step_16=#{step_16}, step_17=#{step_17}, step_18=#{step_18}, step_19=#{step_19}, step_20=#{step_20}, 
+	tip=#{tip}, fname0=#{fname0}, fname1=#{fname1}, fname2=#{fname2}, fname3=#{fname3}, fname4=#{fname4}, fname5=#{fname5}, fname6=#{fname6}, 
+	fname7=#{fname7}, fname8=#{fname8}, fname9=#{fname9}, fname10=#{fname10}, fname11=#{fname11}, fname12=#{fname12}, fname13=#{fname13}, 
+	fname14=#{fname14}, fname15=#{fname15}, fname16=#{fname16}, fname17=#{fname17}, fname18=#{fname18}, fname19=#{fname19}, fname20=#{fname20} 
+	where mr_id=#{mr_id}
+	</update>
+	<select id="get_pwd" resultType="String">
+	 select pwd from mrecipe where mr_id=#{param1}
+	</select>
+	<select id="pwd_check" resultType="Integer">
+	  select count(*) from mrecipe where pwd=#{pwd} and mr_id=#{id}
+	</select>
+	<select id="review_list" parameterType="String" resultType="kr.co.life.recipe.dto.MRReviewDto">
+	  select * from mrreview where mr_id=#{param1} order by id desc
+	</select>
+	<select id="getAvgRating" parameterType="String" resultType="Integer">
+	  select avg(rating) from mrreview where mr_id=#{param1}
+	</select>
+</mapper>
